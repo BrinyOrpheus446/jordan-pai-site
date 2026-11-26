@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://brinyorpheus446.github.io/jordan-pai-site/sitemap.xml
