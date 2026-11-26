@@ -105,7 +105,7 @@ figcaption { font: italic 400 15px var(--serif); color: var(--muted); margin-top
 
 /* stacked project panels */
 .stack { display: grid; gap: 28px; }
-.panel { position: sticky; top: calc(84px + var(--i) * 16px); min-height: min(72vh, 620px); border-radius: 24px; background: var(--panel); border: 1px solid var(--line); padding: clamp(26px, 4vw, 52px); display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: center; transform-origin: 50% 0; will-change: transform; box-shadow: 0 -18px 50px -30px rgba(43, 33, 29, .35); }
+.panel { position: sticky; top: calc(84px + var(--i) * 16px); height: min(78vh, 640px); border-radius: 24px; background: var(--panel); border: 1px solid var(--line); padding: clamp(26px, 4vw, 52px); display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: stretch; transform-origin: 50% 0; will-change: transform; box-shadow: 0 -18px 50px -30px rgba(43, 33, 29, .35); }
 .panel.dark { background: var(--deep); color: var(--deep-ink); border-color: transparent; }
 .panel.dark .role, .panel.dark .line, .panel.dark .kicker { color: color-mix(in srgb, var(--deep-ink) 78%, transparent); }
 .panel h3 { font: 800 clamp(34px, 5vw, 60px)/1 var(--sans); letter-spacing: -.03em; margin: 0 0 10px; }
@@ -117,11 +117,11 @@ figcaption { font: italic 400 15px var(--serif); color: var(--muted); margin-top
 .tldr { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 10px 20px; margin: 0 0 4px; font-size: 15.5px; }
 .tldr dt { font-size: 11.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ochre); padding-top: 4px; }
 .tldr dd { margin: 0; }
-.panel .frame { border-radius: 14px; aspect-ratio: 4 / 5; max-height: 52vh; width: 100%; justify-self: end; }
-.panel .frame img { height: 100%; object-fit: cover; }
-.panel .frame.wide { aspect-ratio: 4 / 3; }
-.big-soon { font: 800 clamp(54px, 9vw, 120px)/.9 var(--sans); letter-spacing: -.04em; color: var(--deep-accent); margin: 0; }
-.big-soon em { font: italic 400 1.05em var(--serif); display: block; }
+/* every panel: text column centered, image fills the full right column so all four cards share one shape */
+.panel > div:first-child { display: flex; flex-direction: column; justify-content: center; }
+.panel > div:first-child > .btn { align-self: flex-start; }
+.panel .frame { position: relative; border-radius: 14px; }
+.panel .frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .ingredients { list-style: none; margin: 0 0 26px; padding: 0; display: grid; gap: 14px; font-size: 16px; }
 .ingredients li { display: grid; grid-template-columns: 7.5em minmax(0, 1fr); gap: 14px; border-bottom: 1px dotted var(--line); padding-bottom: 12px; }
 .ingredients b { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ochre); padding-top: 3px; }
@@ -129,8 +129,13 @@ figcaption { font: italic 400 15px var(--serif); color: var(--muted); margin-top
 
 /* paths */
 .paths { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 36px); margin-top: 16px; }
-.path { position: relative; padding-top: 24px; display: flex; flex-direction: column; gap: 12px; }
-.path::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--ink); transform-origin: 0 50%; }
+.path { position: relative; padding: 26px 22px 24px; border-radius: 18px; display: flex; flex-direction: column; gap: 12px; cursor: pointer; transition: background-color .4s var(--ease), box-shadow .4s var(--ease), translate .4s var(--ease); }
+.path::before { content: ""; position: absolute; top: 0; left: 22px; right: 22px; height: 2px; background: var(--ink); transform-origin: 0 50%; transition: background-color .4s; }
+.path h3 { transition: color .4s; }
+.path:hover, .path:focus-within { background: var(--panel); box-shadow: 0 0 0 1px var(--line), 0 24px 50px -30px rgba(43, 33, 29, .45); translate: 0 -4px; }
+.path:hover::before, .path:focus-within::before { background: var(--ochre); }
+.path:hover h3, .path:focus-within h3 { color: var(--ochre); }
+.path:hover .btn.ghost { background: var(--ochre); color: var(--bg); }
 .path .who { font: italic 400 18px var(--serif); color: var(--muted); }
 .path h3 { font: 800 clamp(24px, 2.6vw, 30px)/1.1 var(--sans); letter-spacing: -.02em; margin: 0; }
 .path ul { margin: 0; padding-left: 1.1em; font-size: 16px; display: grid; gap: 6px; }
@@ -214,7 +219,6 @@ footer .legal a:hover { color: var(--ochre); }
     @keyframes unveil { from { clip-path: inset(22% 0 0 0 round 14px); } to { clip-path: inset(0 0 0 0 round 4px); } }
     .panel .frame { animation-name: unveil-p; }
     @keyframes unveil-p { from { clip-path: inset(22% 0 0 0 round 14px); } to { clip-path: inset(0 0 0 0 round 14px); } }
-    .big-soon { animation: float linear both; animation-timeline: view(); }
     @keyframes float { from { transform: translateY(40px); } to { transform: translateY(-40px); } }
     .ingredients li, .tldr dd, .path li { animation: slidein linear both; animation-timeline: view(); animation-range: entry 0% entry 90%; }
     @keyframes slidein { from { transform: translateX(-22px); opacity: .15; } }
@@ -230,8 +234,8 @@ footer .legal a:hover { color: var(--ochre); }
   .nav ul { gap: 14px; font-size: 13px; }
   .nav ul .hide-s { display: none; }
   .about, .signup, .panel, .paths, .row2 { grid-template-columns: minmax(0, 1fr); }
-  .panel { position: relative; top: auto; min-height: 0; }
-  .panel .frame { justify-self: stretch; max-height: 46vh; aspect-ratio: 4 / 3; }
+  .panel { position: relative; top: auto; height: auto; }
+  .panel .frame { aspect-ratio: 4 / 3; }
   .tags li + li::before { width: 22px; }
   .kicker { flex-wrap: wrap; }
   .ingredients li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
@@ -300,7 +304,7 @@ footer .legal a:hover { color: var(--ochre); }
           <p class="line">Coming soon. Medical professionals, I'd love your help building it.</p>
           <a class="btn ghost" href="#signup-area" data-scroll data-pick="medical">Help build MedRPG</a>
         </div>
-        <p class="big-soon" aria-hidden="true">Press<em>start.</em></p>
+        <div class="frame parallax"><img src="img/medrpg.jpg" alt="Pixel-art hospital lobby with a doctor, nurses at the front desk and a waiting area" width="1000" height="1000" loading="lazy" decoding="async"></div>
       </article>
 
       <article class="panel" style="--i:1" aria-labelledby="p2">
@@ -331,7 +335,7 @@ footer .legal a:hover { color: var(--ochre); }
           </ul>
           <a class="btn ghost" href="#signup-area" data-scroll data-pick="user">Get early access</a>
         </div>
-        <div class="frame parallax wide"><img src="img/sunset.jpg" alt="Sunset over flat country with a train on the horizon" width="480" height="360" loading="lazy" decoding="async"></div>
+        <div class="frame parallax"><img src="img/sunset.jpg" alt="Sunset over flat country with a train on the horizon" width="480" height="360" loading="lazy" decoding="async"></div>
       </article>
 
       <article class="panel" style="--i:3" aria-labelledby="p4">
@@ -340,12 +344,12 @@ footer .legal a:hover { color: var(--ochre); }
           <h3 id="p4">Rural placement <em>research</em></h3>
           <p class="role">Researcher</p>
           <dl class="tldr">
-            <dt>Question</dt><dd>What makes a rural placement good, and does it change whether students want to practise rurally?</dd>
-            <dt>My role</dt><dd>Mapped the student survey onto the first national quality framework and ran the analysis (2019–2025, n = 1,293).</dd>
-            <dt>Finding</dt><dd>Every quality measure was linked to stronger rural intent. Learning opportunities and valued autonomy led, at about 1.8 times the odds per SD. Preliminary results, not yet peer reviewed.</dd>
+            <dt>The gap</dt><dd>People in rural and remote Australia have fewer doctors, longer trips to care and worse health than people in cities.</dd>
+            <dt>The work</dt><dd>Looking at what makes a student's time in a rural town worthwhile, so more of them come back to practise there.</dd>
+            <dt>The lesson</dt><dd>Communities already know what they need. Good care starts with listening, showing up and staying long enough to earn trust.</dd>
           </dl>
         </div>
-        <div class="frame parallax wide"><img src="img/hill.jpg" alt="A red hill glowing at sunset in the Pilbara" width="678" height="452" loading="lazy" decoding="async"></div>
+        <div class="frame parallax"><img src="img/hill.jpg" alt="A red hill glowing at sunset in the Pilbara" width="678" height="452" loading="lazy" decoding="async"></div>
       </article>
     </div>
   </section>
@@ -573,6 +577,8 @@ footer .legal a:hover { color: var(--ochre); }
     goTo('#signup-area');
     sel.classList.remove('flash'); void sel.offsetWidth; sel.classList.add('flash');
   }));
+  // Whole get-involved card acts as its button.
+  document.querySelectorAll('.path').forEach(c => c.addEventListener('click', (e) => { if (!e.target.closest('button, a')) c.querySelector('[data-pick]').click(); }));
   document.querySelectorAll('a[data-scroll]:not([data-pick])').forEach(a => a.addEventListener('click', (e) => {
     e.preventDefault(); goTo(a.getAttribute('href'));
   }));
