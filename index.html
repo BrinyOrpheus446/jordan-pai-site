@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <link rel="canonical" href="https://brinyorpheus446.github.io/jordan-pai-site/">
 <title>Jordan Pai</title>
-<meta name="description" content="Jordan Pai, future physician and creator of MedRPG, Why Pai? and Recipe for Success. Help build MedRPG, sponsor content or get early access.">
+<meta name="description" content="Jordan Pai, future physician and creator of MedRPG, Why Pai? and Recipes for Success. Help build MedRPG, sponsor content or get early access.">
 <meta property="og:title" content="Jordan Pai">
 <meta property="og:description" content="Games, guides and stories that help people into medicine. Help build MedRPG, sponsor content or get early access.">
 <meta property="og:type" content="website">
@@ -122,6 +122,8 @@ figcaption { font: italic 400 15px var(--serif); color: var(--muted); margin-top
 .panel > div:first-child > .btn { align-self: flex-start; }
 .panel .frame { position: relative; border-radius: 14px; }
 .panel .frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* book cover shows whole, not cropped, with a soft shadow under the book itself */
+.panel .frame.book img { object-fit: contain; filter: drop-shadow(0 18px 28px rgba(43, 33, 29, .35)); }
 .ingredients { list-style: none; margin: 0 0 26px; padding: 0; display: grid; gap: 14px; font-size: 16px; }
 .ingredients li { display: grid; grid-template-columns: 7.5em minmax(0, 1fr); gap: 14px; border-bottom: 1px dotted var(--line); padding-bottom: 12px; }
 .ingredients b { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ochre); padding-top: 3px; }
@@ -214,10 +216,6 @@ footer .legal a:hover { color: var(--ochre); }
 .consentbar button { font: 700 14px var(--sans); border-radius: 999px; padding: 10px 16px; min-height: 42px; cursor: pointer; border: 1px solid var(--bg); background: var(--bg); color: var(--ink); }
 .consentbar button.no { background: transparent; color: var(--bg); }
 
-/* magnifying lens over work photos, only on the panel that's fully in view */
-.lens { position: fixed; left: 0; top: 0; z-index: 35; width: 180px; height: 180px; margin: -90px 0 0 -90px; border-radius: 50%; pointer-events: none; background-repeat: no-repeat; border: 3px solid var(--bg); box-shadow: 0 0 0 1.5px var(--ochre), 0 18px 40px -12px rgba(43, 33, 29, .55); opacity: 0; scale: .6; transition: opacity .25s, scale .35s var(--ease); }
-.lens.on { opacity: 1; scale: 1; }
-.panel .frame.zooming { cursor: none; }
 .progress { position: fixed; top: env(safe-area-inset-top, 0px); left: 0; right: 0; height: 3px; background: var(--ochre); transform-origin: 0 50%; transform: scaleX(0); z-index: 40; pointer-events: none; }
 
 /* motion: hero rolls in on load; the rest rides the scroll where the browser supports scroll timelines */
@@ -278,6 +276,7 @@ footer .legal a:hover { color: var(--ochre); }
   .about, .signup, .panel, .paths, .row2 { grid-template-columns: minmax(0, 1fr); }
   .panel { position: relative; top: auto; height: auto; }
   .panel .frame { aspect-ratio: 4 / 3; }
+  .panel .frame.book { aspect-ratio: 3 / 4; }
   .tags li + li::before { width: 22px; }
   .kicker { flex-wrap: wrap; }
   .ingredients li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
@@ -371,7 +370,7 @@ footer .legal a:hover { color: var(--ochre); }
       <article class="panel" style="--i:2" aria-labelledby="p3">
         <div>
           <div class="kicker"><span>Guide · Working title</span><span>Coming soon</span></div>
-          <h3 id="p3">Recipe for <em>Success</em></h3>
+          <h3 id="p3">Recipes for <em>Success</em></h3>
           <p class="role">Creator</p>
           <p class="line">A cookbook that pairs each stage of life with a real recipe and the extracurriculars that set you up for what comes next.</p>
           <ul class="ingredients">
@@ -381,7 +380,7 @@ footer .legal a:hover { color: var(--ochre); }
           </ul>
           <a class="btn ghost" href="#signup-area" data-scroll data-pick="user">Get early access</a>
         </div>
-        <div class="frame parallax"><img src="img/sunset.jpg" alt="Sunset over flat country with a train on the horizon" width="480" height="360" loading="lazy" decoding="async"></div>
+        <div class="frame book"><img src="img/recipe-cover.jpg" alt="Cookbook cover titled Recipes for Success: a stethoscope, a knife, a bowl of kimchi and an ECG strip on a cutting board" width="846" height="1200" loading="lazy" decoding="async"></div>
       </article>
 
       <article class="panel" style="--i:3" aria-labelledby="p4">
@@ -419,7 +418,7 @@ footer .legal a:hover { color: var(--ochre); }
       <div class="path">
         <span class="who">Students and anyone curious</span>
         <h3>Get early access</h3>
-        <ul><li>Be first to play MedRPG</li><li>Get Recipe for Success when it's ready</li><li>Hear about new projects</li></ul>
+        <ul><li>Be first to play MedRPG</li><li>Get Recipes for Success when it's ready</li><li>Hear about new projects</li></ul>
         <button class="btn ghost" type="button" data-pick="user">Sign me up</button>
       </div>
     </div>
@@ -527,9 +526,9 @@ footer .legal a:hover { color: var(--ochre); }
     <p class="updated">Last updated 26 November 2026</p>
     <p>By using this site you agree to these terms. If you don't agree, please don't use it.</p>
     <h2>Not medical advice</h2>
-    <p>Everything here, including MedRPG, Why Pai? and Recipe for Success, is for education and general information. It is not medical advice and doesn't create a doctor–patient relationship. For health concerns, see a qualified professional. In an emergency, call your local emergency number.</p>
+    <p>Everything here, including MedRPG, Why Pai? and Recipes for Success, is for education and general information. It is not medical advice and doesn't create a doctor–patient relationship. For health concerns, see a qualified professional. In an emergency, call your local emergency number.</p>
     <h2>Projects in progress</h2>
-    <p>MedRPG, Recipe for Success and other projects are works in progress. Their names, features and release dates may change or be cancelled. Signing up doesn't guarantee access.</p>
+    <p>MedRPG, Recipes for Success and other projects are works in progress. Their names, features and release dates may change or be cancelled. Signing up doesn't guarantee access.</p>
     <h2>Research</h2>
     <p>Research findings shown here are preliminary and not yet peer reviewed. They summarize work done with the Western Australian Centre for Rural Health and don't represent the official position of any university or organization.</p>
     <h2>Content and ownership</h2>
@@ -703,32 +702,6 @@ footer .legal a:hover { color: var(--ochre); }
     });
   }
 
-  // Magnifier: a lens shows the photo at 2.5x under the pointer, only when that panel isn't covered by the next one.
-  const lens = document.createElement('div'); lens.className = 'lens'; lens.setAttribute('aria-hidden', 'true'); document.body.append(lens);
-  let ptr = null;
-  const ZOOM = 2.5;
-  const magnify = () => {
-    const frameEl = ptr && document.elementFromPoint(ptr.x, ptr.y)?.closest('.panel .frame');
-    const panel = frameEl?.closest('.panel');
-    const covered = panel && panel.style.transform && panel.style.transform !== 'scale(1)';
-    document.querySelectorAll('.frame.zooming').forEach(f => f !== frameEl && f.classList.remove('zooming'));
-    if (!frameEl || covered) { lens.classList.remove('on'); return; }
-    const img = frameEl.querySelector('img'), r = img.getBoundingClientRect();
-    if (!img.naturalWidth) return;
-    // object-fit: cover — work out how the photo is drawn inside its box
-    const sc = Math.max(r.width / img.naturalWidth, r.height / img.naturalHeight);
-    const ox = r.left + (r.width - img.naturalWidth * sc) / 2, oy = r.top + (r.height - img.naturalHeight * sc) / 2;
-    if (lens.dataset.src !== img.currentSrc) { lens.style.backgroundImage = `url("${img.currentSrc}")`; lens.dataset.src = img.currentSrc; }
-    lens.style.backgroundSize = `${img.naturalWidth * sc * ZOOM}px ${img.naturalHeight * sc * ZOOM}px`;
-    lens.style.backgroundPosition = `${90 - (ptr.x - ox) * ZOOM}px ${90 - (ptr.y - oy) * ZOOM}px`;
-    lens.style.translate = `${ptr.x}px ${ptr.y}px`;
-    frameEl.classList.add('zooming'); lens.classList.add('on');
-  };
-  if (matchMedia('(pointer: fine)').matches) {
-    document.querySelectorAll('.panel .frame').forEach(f => f.addEventListener('pointerleave', () => { ptr = null; magnify(); }));
-    addEventListener('pointermove', (e) => { ptr = e.target.closest?.('.panel .frame') ? { x: e.clientX, y: e.clientY } : null; magnify(); });
-  }
-
   // Stacked panels: each one shrinks a little as the next rolls over it.
   const panels = [...document.querySelectorAll('.panel')];
   const wide = matchMedia('(min-width: 821px)');
@@ -758,7 +731,6 @@ footer .legal a:hover { color: var(--ochre); }
     }
     progress();
     stackPanels();
-    if (ptr) magnify();
     requestAnimationFrame(frame);
   };
   requestAnimationFrame(frame);
